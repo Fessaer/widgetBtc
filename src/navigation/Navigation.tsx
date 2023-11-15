@@ -3,7 +3,7 @@ import React from "react";
 import {NavigationContainer} from "@react-navigation/native";
 import {createStackNavigator} from "@react-navigation/stack";
 
-import LandingScreen from "@screens/LandingScreen";
+import {LandingScreen} from "../modules";
 import {NAVIGATOR_BOTTOM_TAB, NAVIGATOR_LANDING} from "@utils/screens";
 
 import BottomTabNavigation from "./BottomTabNavigation";
@@ -11,7 +11,7 @@ import BottomTabNavigation from "./BottomTabNavigation";
 const Stack = createStackNavigator();
 
 const NAVIGATION_OPTIONS = {
-	headerShown: false,
+	headerShown: false
 };
 
 const Navigation = () => (
