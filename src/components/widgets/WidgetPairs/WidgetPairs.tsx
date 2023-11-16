@@ -8,11 +8,10 @@ import {iconMap} from "./constants";
 import {Coin, IParsedData} from "./types";
 
 const WidgetPairs = () => {
-	const [firstValue, setFirstValue] = React.useState<Coin>("BTC");
-	const [secondValue, setSecondValue] = React.useState<Coin>("USDT");
-	const [visible, setIsVisible] = useState(false);
-
-  const coinHandle = () => {}
+	const [isFirstModal, setIsFirstModal] = useState(false);
+	const [isSecondModal, setIsSecondModal] = useState(false);
+	const [secondValue, setSecondValue] = useState<Coin>("USDT");
+	const [firstValue, setFirstValue] = useState<Coin>("BTC");
 
 	const data: IParsedData[] = [
 		{label: "BTC", value: "BTC"},
@@ -24,10 +23,10 @@ const WidgetPairs = () => {
 		<View style={[styles.container]}>
 			<View style={styles.containerWidget}>
 				<TextInput value={firstValue} style={[styles.inputContainer]} />
-				<CryptoSelector onPress={setIsVisible} icon={iconMap[firstValue]} />
+				<CryptoSelector onPress={setIsFirstModal} icon={iconMap[firstValue]} />
 				<Picker
-					isVisible={visible}
-					onClose={() => setIsVisible(false)}
+					isVisible={isFirstModal}
+					onClose={() => setIsFirstModal(false)}
 					data={data}
 					setValue={setFirstValue}
 					selectedValue={firstValue}
@@ -40,10 +39,13 @@ const WidgetPairs = () => {
 			/>
 			<View style={styles.containerWidget}>
 				<TextInput value={secondValue} style={[styles.inputContainer]} />
-				<CryptoSelector onPress={setIsVisible} icon={iconMap[secondValue]} />
+				<CryptoSelector
+					onPress={setIsSecondModal}
+					icon={iconMap[secondValue]}
+				/>
 				<Picker
-					isVisible={visible}
-					onClose={() => setIsVisible(false)}
+					isVisible={isSecondModal}
+					onClose={() => setIsSecondModal(false)}
 					data={data}
 					setValue={setSecondValue}
 					selectedValue={secondValue}
