@@ -1,9 +1,9 @@
 import {useQuery, UseQueryResult} from "react-query";
 import {publicRequest, IData, IError} from "../services";
 
-
-interface IGetExchangeInfoParams {
-  symbol: "BTCUSDT" | "ETHBTC" | "ETHUSDT"
+export type Pair = "BTCUSDT" | "ETHBTC" | "ETHUSDT"
+export interface IGetExchangeInfoParams {
+  symbol: Pair
 }
 
 interface IGetExchangeInfo {
@@ -22,5 +22,5 @@ const queryFn = (params: IGetExchangeInfoParams) => {
 };
 
 export const useGetExchangeInfo = (params: IGetExchangeInfoParams): UseQueryResult<IData<IGetExchangeInfo>, IError> => {
-	return useQuery([URL_EXCHANGE_INFO], () => queryFn(params));
+	return useQuery([URL_EXCHANGE_INFO], () => queryFn(params), {enabled: false});
 };
