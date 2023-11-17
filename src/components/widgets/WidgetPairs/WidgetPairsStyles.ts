@@ -1,34 +1,36 @@
-import {StyleSheet} from "react-native";
+import {Platform, StyleSheet} from "react-native";
 
 export default StyleSheet.create({
 	container: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-		alignItems: "center",
-	},
-	containerWidget: {
-		flex: 1,
-
+		backgroundColor: "white",
 		borderRadius: 5,
-		borderWidth: 2,
-		borderColor: "rgb(203 213 225)",
-		alignItems: "center",
+		...Platform.select({
+			ios: {
+				shadowColor: "rgb(31 41 55)",
+				shadowOpacity: 0.2,
+				shadowRadius: 2,
+				shadowOffset: {
+					height: 2,
+					width: 2,
+				},
+			},
+			android: {
+				elevation: 2,
+				backgroundColor: "rgba(0, 0, 0, 4)",
+			},
+		}),
+	},
+	widget: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-	},
-	inputContainer: {
-		flexGrow: 1,
-		flex: 1,
-		alignSelf: "stretch",
-
-		borderRightWidth: 2,
-		borderColor: "rgb(203 213 225)",
-		padding: 5,
+		alignItems: "center",
+		padding: 10,
 	},
 	imageContainer: {
 		margin: 5,
+		tintColor: "rgb(107 114 128)",
+		width: 12,
+		height: 12,
+		transform: [{rotate: "90deg"}],
 	},
-	colorImage:{
-		tintColor: "rgb(75 85 99)",
-	}
 });

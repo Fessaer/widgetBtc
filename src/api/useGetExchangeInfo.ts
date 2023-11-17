@@ -1,14 +1,22 @@
 import {useQuery, UseQueryResult} from "react-query";
 import {publicRequest, IData, IError} from "../services";
 
-export type Pair = "BTCUSDT" | "ETHBTC" | "ETHUSDT"
+export enum Pair {
+	"BTCUSDT" = "BTCUSDT",
+	"ETHBTC" = "ETHBTC",
+	"ETHUSDT" = "ETHUSDT"
+} 
 export interface IGetExchangeInfoParams {
-  symbol: Pair
+  symbol: Pair;
 }
 
-interface IGetExchangeInfo {
+interface IOnSuccess {
+	(arg: IData<IGetExchangeInfo>): void
+}
+
+export interface IGetExchangeInfo {
   symbol: string;
-  price: string
+  price: string;
 }
 
 const URL_EXCHANGE_INFO = "v3/ticker/price";
@@ -21,6 +29,6 @@ const queryFn = (params: IGetExchangeInfoParams) => {
 	});
 };
 
-export const useGetExchangeInfo = (params: IGetExchangeInfoParams): UseQueryResult<IData<IGetExchangeInfo>, IError> => {
-	return useQuery([URL_EXCHANGE_INFO], () => queryFn(params), {enabled: false});
+export const useGetExchangeInfo = (params: IGetExchangeInfoParams, onSuccess: IOnSuccess): UseQueryResult<IData<IGetExchangeInfo>, IError> => {
+	return useQuery([URL_EXCHANGE_INFO], () => queryFn(params), {enabled: false, onSuccess});
 };

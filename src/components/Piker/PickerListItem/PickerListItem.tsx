@@ -7,22 +7,21 @@ import {Coin} from "@components/widgets/WidgetPairs/types";
 
 export interface IPickerListItemProps extends IPickerItem {
 	setValue: (value: Coin) => void;
-	selectedValue?: Coin;
 }
 
 const PickerListItem = (props: IPickerListItemProps) => {
-	const {setValue, selectedValue, label, value, icon} = props;
+	const {setValue, value, icon, disabled} = props;
 
 	const onPress = useCallback(() => setValue(value), [setValue, value]);
 
-	if (selectedValue === value) {
-		return null;
-	}
-
 	return (
-		<TouchableOpacity style={styles.container} onPress={onPress}>
+		<TouchableOpacity
+			style={[styles.container, disabled && {opacity: 0.3}]}
+			onPress={onPress}
+			disabled={disabled}
+		>
 			<Image source={icon} className="w-7 h-7" />
-			<Text>{label}</Text>
+			<Text>{value}</Text>
 		</TouchableOpacity>
 	);
 };

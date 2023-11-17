@@ -3,7 +3,7 @@ import {FlatList, FlatListProps} from "react-native";
 import {isEqual} from "lodash";
 import PickerListItem from "../PickerListItem/PickerListItem";
 import {IPickerItem} from "../types/pickerItem";
-import { Coin } from "@components/widgets/WidgetPairs/types";
+import {Coin} from "@components/widgets/WidgetPairs/types";
 
 export interface IPickerListProps
 	extends Omit<FlatListProps<IPickerItem>, "renderItem"> {
@@ -26,18 +26,17 @@ const PickerList = (props: IPickerListProps): JSX.Element => {
 		}
 	}, []);
 
-	const keyExtractor = useCallback(({label}: IPickerItem) => label, []);
+	const keyExtractor = useCallback(({value}: IPickerItem) => value, []);
 
 	const renderItem = useCallback(
 		({item}: {item: IPickerItem}) => {
-			const {value, label, icon} = item;
+			const {value, icon, disabled = false} = item;
 			return (
 				<PickerListItem
 					icon={icon}
 					value={value}
 					setValue={setValue}
-					label={label}
-					selectedValue={selectedValue}
+					disabled={disabled}
 				/>
 			);
 		},

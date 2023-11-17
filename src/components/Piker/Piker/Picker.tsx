@@ -21,7 +21,6 @@ const Picker = (props: IPickerProps): JSX.Element => {
 
 	const selectValue = useCallback(
 		(value: Coin) => {
-      console.log(value)
 			setValue(value);
 			onClose();
 		},
